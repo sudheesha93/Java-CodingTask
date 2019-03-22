@@ -3,10 +3,12 @@ package com.walmart.RESTService.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -30,6 +32,7 @@ public class StudentRestControllerTest {
 	private StudentDAO dao;
 	
 	
+	// Test case for find all students
 	@Test
 	public void findAllTest() throws Exception{
 		
@@ -51,6 +54,8 @@ public class StudentRestControllerTest {
 		
 	}
 	
+	
+	// Test case for find student with a specific ID
 	@Test
 	public void findByIdTest() throws Exception {
 		
@@ -67,21 +72,23 @@ public class StudentRestControllerTest {
 
 	}
 	
+	// Test case for accessing details from the URL and adding them to database
 	@Test
 	public void addDetailsTest() throws Exception{
 		
-		Student s=new Student(10,"sree","sree@gmail.com",3.5);
-		Mockito.when(dao.addDeatails(Mockito.anyInt(), Mockito.anyString(),
+		Student s=new Student(11,"sanjay","sanjay@gmail.com",3);
+		Mockito.when(dao.addDetails(Mockito.anyInt(), Mockito.anyString(),
 										Mockito.anyString(), Mockito.anyDouble())).thenReturn(s);
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students/sree/sree@gmail.com/3.5?id=10")
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students/sanjay/sanjay@gmail.com/3?id=11")
 				.accept(MediaType.APPLICATION_JSON);
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		System.out.println(result.getResponse());
-		String expected="{id:10,name:sree,email:sree@gmail.com,gpa:3.5}";
-		JSONAssert.assertNotEquals(expected, result.getResponse().getContentAsString(), false);
+		String expected="{id:11,name:sanjay,email:sanjay@gmail.com,gpa:3}";
+		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
 	
 	}
 	
+	// Test case for accessing details from the URL and populating a student object
 	@Test
 	public void printStudentDetailsTest() throws Exception{
 		

@@ -10,11 +10,11 @@ public interface StudentDAO {
 	
 	public Student findbyID(int id);
 	
-	public void save(Student emp);
+	public void saveOrUpdate(Student emp);
 	
 	public void deleteByID(int id);
 	
-	public Student addDeatails(int id, String name, String email, double gpa);
+	public Student addDetails(int id, String name, String email, double gpa);
 
 	public Student printStudent(int id, String name, String email, double gpa);
 	

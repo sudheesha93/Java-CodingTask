@@ -41,7 +41,7 @@ public class StudentDAOImplementation implements StudentDAO {
 
 	@Override
 	@Transactional
-	public void save(Student student) {
+	public void saveOrUpdate(Student student) {
 		Session curreSession = entityManager.unwrap(Session.class);
 		curreSession.saveOrUpdate(student);
 
@@ -59,7 +59,7 @@ public class StudentDAOImplementation implements StudentDAO {
 
 	@Override
 	@Transactional
-	public Student addDeatails(int id, String name, String email, double gpa) {
+	public Student addDetails(int id, String name, String email, double gpa) {
 
 		Session curreSession = entityManager.unwrap(Session.class);
 

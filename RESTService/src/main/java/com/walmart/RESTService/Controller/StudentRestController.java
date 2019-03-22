@@ -50,14 +50,14 @@ public class StudentRestController {
 	@RequestMapping(value="/students", method=RequestMethod.POST)
 	public Student addStudent(@RequestBody Student student) {
 		student.setId(0);
-		dao.save(student);
+		dao.saveOrUpdate(student);
 		return student;
 		
 	}
 	
 	@PutMapping("/students")
 	public Student updateEmployee(@RequestBody Student student) {
-		dao.save(student);
+		dao.saveOrUpdate(student);
 		return student;
 	}
 	
@@ -82,7 +82,7 @@ public class StudentRestController {
 	public Student addStudent(@PathVariable String name,
 								@PathVariable String email,
 								@PathVariable double gpa, @RequestParam int id) {
-		Student student=dao.addDeatails(id, name, email, gpa);
+		Student student=dao.addDetails(id, name, email, gpa);
 		
 	
 		return student;
