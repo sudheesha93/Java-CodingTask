@@ -55,6 +55,7 @@ public class CustomizeInput{
 
 		CustomizeString cs= new CustomizeString();
 		System.out.println(cs.customSort("89aDcQAb51"));
+		System.out.println(cs.customSort("62uHwLowIT92"));
 	}
 
 }

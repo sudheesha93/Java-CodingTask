@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 import jdk.nashorn.internal.ir.SetSplitState;
 
 public class UnsortedSet {
@@ -20,7 +22,6 @@ public class UnsortedSet {
 		Set<Integer> set1= new LinkedHashSet<>();
 		set1.add(6);
 		set1.add(2);
-		set1.add(10);
 		set1.add(4);
 		set1.add(8);
 		set1.add(1);
@@ -32,8 +33,10 @@ public class UnsortedSet {
 		set2.add(8);
 		set1.add(5);
 		set2.add(6);
-		set2.add(10);
 		set2.add(3);
+		set2.add(7);
+		
+		
 		
 		
 		System.out.println("Common elements in both the sets");
@@ -72,15 +75,13 @@ public class UnsortedSet {
 			}
 		}
 		
-		Set keys= map.keySet();
-		for(Object k : keys) {
+		Set<Integer> keys= map.keySet();
+		for(int k : keys) {
 			if(map.get(k)==2) {
 				System.out.println("( "+ k +","+ k + " )");
 			}
 		}
 		
-				
-
 	}
 
 }
