@@ -1,7 +1,11 @@
 package com.walmart.RESTService.Controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +16,8 @@ import org.skyscreamer.jsonassert.JSONCompare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -79,13 +85,15 @@ public class StudentRestControllerTest {
 		Student s=new Student(11,"sanjay","sanjay@gmail.com",3);
 		Mockito.when(dao.addDetails(Mockito.anyInt(), Mockito.anyString(),
 										Mockito.anyString(), Mockito.anyDouble())).thenReturn(s);
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/students/sanjay/sanjay@gmail.com/3?id=11")
+				
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/students/sanjay/sanjay@gmail.com/3?id=11")
 				.accept(MediaType.APPLICATION_JSON);
+				
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		System.out.println(result.getResponse());
-		String expected="{id:11,name:sanjay,email:sanjay@gmail.com,gpa:3}";
-		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
-	
+		HttpServletResponse response=result.getResponse();
+		
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		
 	}
 	
 	// Test case for accessing details from the URL and populating a student object

@@ -94,9 +94,11 @@ public class StudentRestController {
 	public Student printStudentDetails(@PathVariable String name,
 								@PathVariable String email,
 								@PathVariable double gpa, @RequestParam int id) {
-
+		
+		
 		 Student student= dao.printStudent(id,name, email,gpa);
-		 System.out.println("Student values obtained from the url : ");
+		 
+		
 		 return student;
 }
 	

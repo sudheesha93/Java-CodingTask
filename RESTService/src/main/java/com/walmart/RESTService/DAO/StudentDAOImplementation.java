@@ -83,6 +83,12 @@ public class StudentDAOImplementation implements StudentDAO {
 		Session curreSession = entityManager.unwrap(Session.class);
 
 		Student student = new Student();
+		student.setId(id);
+		student.setEmail(email);
+		student.setGpa(gpa);
+		student.setName(name);
+		
+		
 
 		student.setId(id);
 		student.setEmail(email);
